@@ -61,12 +61,12 @@ public class HotXposed implements IXposedHookLoadPackage, IXposedHookZygoteInit 
         try {
             hook = SpUtils.getBoolean(loadPackageParam.packageName, false);
             if (hook) {
-                LogUtils.d("hook==>: " + loadPackageParam.packageName + ":" + loadPackageParam.processName);
+                LogUtils.d("hookApp(hot)==>: " + loadPackageParam.processName);
             } else {
-                LogUtils.v("skip: " + loadPackageParam.packageName + ":" + loadPackageParam.processName);
+                LogUtils.v("skipApp(hot)==>: " + loadPackageParam.processName);
             }
         } catch (Throwable e) {
-            LogUtils.e("skip==>: " + loadPackageParam.packageName + ":" + loadPackageParam.processName + ". 获取开关失败." + e.getMessage());
+            LogUtils.e("skipApp(hot)==>: " + loadPackageParam.processName + ". 获取开关失败." + e.getMessage());
         }
         if (!hook) {
             return;
@@ -93,6 +93,7 @@ public class HotXposed implements IXposedHookLoadPackage, IXposedHookZygoteInit 
                         e.printStackTrace();
                     }
                     loadPackageParam.setObjectExtra("hot", true);
+                    LogUtils.d("hot hook from " + param.thisObject);
                     cls.getDeclaredMethod(handleHookMethod, loadPackageParam.getClass()).invoke(instance, loadPackageParam);
                 } catch (Throwable e) {
                     LogUtils.e("热更失效了");

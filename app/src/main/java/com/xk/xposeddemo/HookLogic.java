@@ -33,12 +33,12 @@ public class HookLogic implements IXposedHookLoadPackage, IXposedHookZygoteInit 
             try {
                 hook = SpUtils.getBoolean(loadPackageParam.packageName, false);
                 if (hook) {
-                    LogUtils.d("hook==>: " + loadPackageParam.packageName + ":" + loadPackageParam.processName);
+                    LogUtils.d("hookApp(cold)==>: " + loadPackageParam.processName);
                 } else {
-                    LogUtils.v("skip: " + loadPackageParam.packageName + ":" + loadPackageParam.processName);
+                    LogUtils.v("skipApp(cold)==>: " + loadPackageParam.processName);
                 }
             } catch (Throwable e) {
-                LogUtils.e("skip==>: " + loadPackageParam.packageName + ":" + loadPackageParam.processName + ". 获取开关失败. " + e.getMessage());
+                LogUtils.e("skipApp(cold)==>: " + loadPackageParam.processName + ". 获取开关失败. " + e.getMessage());
             }
             if (!hook) {
                 return;

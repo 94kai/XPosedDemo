@@ -21,9 +21,9 @@ public class HookDispatcher {
         for (String action : actions) {
             boolean needHook = SpUtils.getBoolean(action, false);
             if (needHook) {
-                LogUtils.d("hookAction: " + action);
+                LogUtils.d("hookAction==>: " + action);
             } else {
-                LogUtils.v("skipAction: " + action);
+                LogUtils.v("skipAction==>: " + action);
             }
             if (needHook) {
                 hookActions.get(action).run();
